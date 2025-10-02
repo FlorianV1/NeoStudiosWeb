@@ -17,5 +17,13 @@ export default {
         },
     },
 
+    colors: {
+        primary: {
+            DEFAULT: '#00ff87',  // Main green
+            dark: '#00cc6e',     // Darker green
+            light: '#60efff'     // Light cyan
+        },
+    },
+
     plugins: [forms],
 };
