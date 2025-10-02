@@ -9,7 +9,7 @@ return [
     ],
     'links' => [
         'invite' => 'https://discord.com/oauth2/authorize?client_id=YOUR_BOT_ID&scope=bot%20applications.commands&permissions=8',
-        'support' => 'https://discord.gg/yourserver',
+        'support' => 'https://discord.gg/XTRpThZwTB',
         'privacy' => '/privacy-policy', // Dedicated privacy link
         'terms' => '/terms-of-service', // Dedicated terms link
     ],
