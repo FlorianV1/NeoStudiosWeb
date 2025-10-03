@@ -40,11 +40,12 @@ class DiscordController extends Controller
                 return redirect('/login')->withErrors(['error' => 'Login failed immediately after creation.']);
             }
 
-            return redirect()->intended('/admin');
+            return redirect()->intended('/dashboard');
 
-        } catch (SocialiteExelption $e) {
+        } catch (\Exception $e) {
         // Even uitzoeken wat precies de juiste exception class. Je moet er iig voor zorgen om
-        // niet "teveel" op te vangen, want anders is het een drama om te debuggen.
+            \Log::error('Discord Authentication Failed: ' . $e->getMessage());
+            // niet "teveel" op te vangen, want anders is het een drama om te debuggen.
         return redirect('/login')->withErrors(['error' => 'Failed to authenticate with Discord: ' . $e->getMessage()]);
     }
     }
