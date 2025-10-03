@@ -13,14 +13,12 @@ class DiscordController extends Controller
     {
         return Socialite::driver('discord')
             ->scopes(['identify', 'email', 'guilds'])
-            ->with(['permissions' => '8'])
             ->redirect();
     }
 
     public function callback()
     {
         try {
-
             $discordUser = Socialite::driver('discord')->user();
 
             $user = User::updateOrCreate(
@@ -37,16 +35,27 @@ class DiscordController extends Controller
             Auth::login($user, true);
 
             if (!Auth::check()) {
-                return redirect('/login')->withErrors(['error' => 'Login failed immediately after creation.']);
+                return redirect('/login')->withErrors(['error' => 'Login failed.']);
+            }
+
+            if ($user->is_admin) {
+                return redirect()->intended('/admin');
             }
 
             return redirect()->intended('/dashboard');
 
         } catch (\Exception $e) {
-        // Even uitzoeken wat precies de juiste exception class. Je moet er iig voor zorgen om
             \Log::error('Discord Authentication Failed: ' . $e->getMessage());
-            // niet "teveel" op te vangen, want anders is het een drama om te debuggen.
-        return redirect('/login')->withErrors(['error' => 'Failed to authenticate with Discord: ' . $e->getMessage()]);
+            return redirect('/login')->withErrors(['error' => 'Failed to authenticate with Discord.']);
+        }
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect('/')->with('success', 'Logged out successfully');
     }
 }
