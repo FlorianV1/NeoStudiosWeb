@@ -5,6 +5,7 @@
     $links = $config['links'];
     $features = $config['features'];
     $stats = $config['stats'];
+    $userIsLoggedIn = auth()->check();
 @endphp
 
 {{-- Use the new Layout Component --}}
@@ -55,20 +56,20 @@
             </h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div class="text-center">
-                    <h3 class="text-6xl font-extrabold neon-gradient-text">{{ $stats['servers'] }}</h3>
-                    <p class="text-lg text-text-muted mt-2">Servers</p>
+                    <h3 class="text-6xl font-extrabold neon-gradient-text">{{ $stats['column-1-answer'] }}</h3>
+                    <p class="text-lg text-text-muted mt-2">{{$stats['column-1']}}</p>
                 </div>
                 <div class="text-center">
-                    <h3 class="text-6xl font-extrabold neon-gradient-text">{{ $stats['users'] }}</h3>
-                    <p class="text-lg text-text-muted mt-2">Users</p>
+                    <h3 class="text-6xl font-extrabold neon-gradient-text">{{ $stats['column-2-answer'] }}</h3>
+                    <p class="text-lg text-text-muted mt-2">{{$stats['column-2']}}</p>
                 </div>
                 <div class="text-center">
-                    <h3 class="text-6xl font-extrabold neon-gradient-text">{{ $stats['uptime'] }}</h3>
-                    <p class="text-lg text-text-muted mt-2">Uptime</p>
+                    <h3 class="text-6xl font-extrabold neon-gradient-text">{{ $stats['column-3-answer'] }}</h3>
+                    <p class="text-lg text-text-muted mt-2">{{$stats['column-3']}}</p>
                 </div>
                 <div class="text-center">
-                    <h3 class="text-6xl font-extrabold neon-gradient-text">24/7</h3>
-                    <p class="text-lg text-text-muted mt-2">Support</p>
+                    <h3 class="text-6xl font-extrabold neon-gradient-text">{{ $stats['column-4-answer'] }}</h3>
+                    <p class="text-lg text-text-muted mt-2">{{$stats['column-4']}}</p>
                 </div>
             </div>
         </div>
